@@ -1,13 +1,15 @@
-// App.tsx
-
-import React from 'react'
+import React from 'react';
+import UserAuthPage from './pages/UserAuthPage';
+import TitleBar from './components/TitleBar';
+import '../src/index.css';
 
 const App = () => {
     return (
         <>
-            <span>HELLO</span>
+            <TitleBar></TitleBar>
+            <UserAuthPage></UserAuthPage>
         </>
-    )
-}
+    );
+};
 
-export default App
+export default App;
