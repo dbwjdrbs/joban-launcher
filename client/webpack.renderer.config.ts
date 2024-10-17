@@ -15,5 +15,10 @@ export const rendererConfig: Configuration = {
   plugins,
   resolve: {
     extensions: ['.js', '.ts', '.jsx', '.tsx', '.css'],
+    fallback: {
+      fs: false, // fs 모듈을 사용하지 않는다면 false로 설정
+      path: require.resolve("path-browserify"), // path 모듈의 polyfill 추가
+      // 필요한 다른 polyfill 추가
+    }
   },
 };
