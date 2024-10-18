@@ -44,11 +44,11 @@ const Button = styled.button<ButtonProps>`
   transition: background-color 0.3s;
 
   &:hover {
-    background-color: ${props => props.hoverColor || "#383838"}; /* 호버 시 배경색 */
+    background-color: ${(props) => props.hoverColor || "#383838"}; /* 호버 시 배경색 */
   }
 
   &:active {
-    background-color: ${props => props.activeColor || "#4d4d4d"};
+    background-color: ${(props) => props.activeColor || "#4d4d4d"};
   }
 `;
 
@@ -57,18 +57,17 @@ const TitleText = styled.div`
     margin-left: 15px;
 `;
 
-const TitleBar = () => {
-    const { ipcRenderer } = window.require('electron');
+const TitleBar: React.FC = () => {
 
     const handleMinimizeWindow = () => {
-        const ipc = ipcRenderer;
-        ipc?.send('minimizeApp');
+        window.electron.sendRequest('minimizeApp', null);
+
     };
 
     const handleCloseWindow = () => {
-        const ipc = ipcRenderer;
-        ipc.send('closeApp');
+        window.electron.sendRequest('closeApp', null);
     };
+
 
     return (
         <Wrap>

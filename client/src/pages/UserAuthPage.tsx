@@ -12,21 +12,23 @@ const Wrap = styled.div`
 
 const ButtonContainer = styled.div`
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    flex-direction: column;
 `;
 
 const Button = styled.button`
-    width: 200px;
-    height: 100px;
+    width: 400px;
+    height: 50px;
+    margin-bottom: 10px;
 `;
 
 const UserAuthPage = () => {
     return (
         <Wrap>
-            <Button>비회원 로그인</Button>
-            <Button>로그인</Button>
-            <Button>회원가입</Button>
+            <ButtonContainer>
+                <Button>비회원 로그인</Button>
+                <Button>로그인</Button>
+                <Button>회원가입</Button>
+            </ButtonContainer>
         </Wrap>
     );
 };
