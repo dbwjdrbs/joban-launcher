@@ -13,12 +13,14 @@ if (require('electron-squirrel-startup')) {
 
 const createWindow = (): void => {
   // Create the browser window.
-  // const path = window.require('electron');
+  const path = require('path');
+
   const win = new BrowserWindow({
     height: 600,
     width: 1100,
     minWidth: 1100,
     minHeight: 600,
+    icon: path.join(__dirname, './assets/icons/120x120.ico'),
     frame: false, // 타이틀바 제거
     // maximizable: false,
     backgroundColor: '#1b1b1b',  // 배경색 설정 (창과 동일한 색상)
@@ -31,7 +33,7 @@ const createWindow = (): void => {
   });
   // const path = require('path');
   // and load the index.html of the app.
-  
+
   win.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
   // Open the DevTools.
   // win.webContents.openDevTools();
