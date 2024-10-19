@@ -6,8 +6,9 @@ import TitleBar from './components/TitleBar';
 createRoot(document.getElementById('app')!).render(
     <React.StrictMode>
         <>
-            <TitleBar />
             <App />
         </>
     </React.StrictMode>
 );
+
+createRoot(document.getElementById('titlebar')!).render(<TitleBar />);

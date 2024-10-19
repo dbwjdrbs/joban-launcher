@@ -23,6 +23,7 @@ const TitleBarContainer = styled.div`
     flex-direction: row;
     justify-content: space-between;
     -webkit-user-select: none;
+    user-select: none;
     -webkit-app-region: drag;
 `;
 
