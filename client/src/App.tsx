@@ -2,20 +2,30 @@ import React from 'react';
 import styled from 'styled-components';
 import '../src/index.css';
 import UserAuthPage from './pages/UserAuthPage';
-import TitleBar from './components/TitleBar';
+import MainPage from './pages/MainPage';
+import { HashRouter, Switch, Route } from 'react-router-dom';
 
 const Wrap = styled.div`
-  height: 600px;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
 `;
 
-const App = () => {
+const App: React.FC = () => {
+
     return (
         <>
-            <TitleBar></TitleBar>
-            <Wrap>
-                <UserAuthPage></UserAuthPage>
-            </Wrap>
+            <HashRouter>
+                <Wrap>
+                    <Switch>
+                        <Route exact path="/">
+                            <UserAuthPage />
+                        </Route>
+                        <Route path="/main-page">
+                            <MainPage />
+                        </Route>
+                    </Switch>
+                </Wrap>
+            </HashRouter>
         </>
     );
 };
