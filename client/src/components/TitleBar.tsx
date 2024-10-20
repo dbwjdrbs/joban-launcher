@@ -2,11 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useSelector } from 'react-redux'
 import { RootState } from '../redux/store';
-
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-    hoverColor?: string;
-    activeColor?: string;
-}
+import { ButtonProps } from "../interfaces/ElementsInterfaces";
 
 const Wrap = styled.div`
     background-color: #1b1b1b;

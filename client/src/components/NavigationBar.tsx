@@ -7,12 +7,7 @@ import setting from "../assets/gear.png";
 import gamestart from "../assets/play-button.png";
 
 import { Link } from "react-router-dom";
-
-interface DivProps extends React.HTMLAttributes<HTMLDivElement> {
-    backgroundImage?: any;
-    backgroundColor?: string;
-    backgroundColor_hover?: string;
-};
+import { DivProps } from "../interfaces/ElementsInterfaces";
 
 interface NavigationBarProps {
     selectedContent: string;

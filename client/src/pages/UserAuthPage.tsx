@@ -4,23 +4,7 @@ import naver_oauth_login from "../assets/naver_oauth_login.png";
 import background from "../assets/auth_background.png";
 import Modal from "../components/Modal";
 
-interface DivProps extends React.HTMLAttributes<HTMLDivElement> {
-    fontSize?: string;
-    fontWeight?: string;
-    backgroundColor?: string;
-    marginBottom?: string;
-    height?: string;
-}
-
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-    marginRight?: string;
-    marginLeft?: string;
-    marginTop?: string;
-    backgroundColor?: string;
-    backgroundColor_hover?: string;
-    backgroundColor_active?: string;
-    width?: string;
-}
+import { DivProps, ButtonProps } from "../interfaces/ElementsInterfaces";
 
 const Wrap = styled.div`
     width: 100%;
