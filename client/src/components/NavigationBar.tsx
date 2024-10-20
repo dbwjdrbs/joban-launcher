@@ -29,7 +29,7 @@ const Container = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    height: 95%;
+    height: 98%;
 `;
 
 const Components = styled.div<DivProps>`
@@ -55,16 +55,6 @@ const Icon = styled.div<DivProps>`
     background-repeat: no-repeat;
     width: 40px;
     height: 40px;
-
-    &:hover {
-        scale: 1.2;
-    }
-`;
-
-const GameStartContainer = styled.div`
-    position: relative;
-    left: 4px;
-    top: 2px;
 
     &:hover {
         scale: 1.2;
