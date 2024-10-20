@@ -9,8 +9,8 @@ import MyInfoPage from './pages/MyInfoPage';
 import SettingPage from './pages/SettingPage';
 
 const Wrap = styled.div`
-  height: 97vh;
-  width: 100vw;
+    height: calc(100vh - 38px);
+    width: 100vw;
 `;
 
 const App: React.FC = () => {
@@ -20,7 +20,7 @@ const App: React.FC = () => {
             <HashRouter>
                 <Wrap>
                     <Switch>
-                        <Route exact path="/" component={UserAuthPage}/>
+                        <Route exact path="/" component={UserAuthPage} />
                         <Route path="/main-page" component={HomePage} />
                         <Route path="/myinfo-page" component={MyInfoPage} />
                         <Route path="/setting-page" component={SettingPage} />

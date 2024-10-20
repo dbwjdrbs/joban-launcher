@@ -64,11 +64,12 @@ const Modal = ({children, isOpenModal}: ModalProps) => {
         <>
             <ModalContainer>
                 {isOpenModal ? (
-                    <ModalBackdrop onClick={openModalHandler}>
-                        <ModalView onClick={(event) => event.stopPropagation()}>
-                            {children}
-                        </ModalView>
-                    </ModalBackdrop>
+                    <></>
+                    // <ModalBackdrop onClick={openModalHandler}>
+                    //     <ModalView onClick={(event) => event.stopPropagation()}>
+                    //         {children}
+                    //     </ModalView>
+                    // </ModalBackdrop>
                 ) : null}
             </ModalContainer>
         </>
