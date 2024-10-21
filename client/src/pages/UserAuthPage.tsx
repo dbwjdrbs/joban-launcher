@@ -89,7 +89,7 @@ const Input = styled.input`
     height: 37px;
     border-radius: 5px;
     border: none;
-    background-color: #616161;
+    background-color: #222222;
     color: white;
     font-size: 18px;
     font-weight: bold;
@@ -152,6 +152,7 @@ const UserAuthPage = () => {
                         <Text fontSize="30px"><Span>JOBAN LAUNCHER</Span> 와 함께<br />전장을 누빌 준비가 되셨나요?</Text>
                         <AuthButton onClick={handleAuth} />
                         <Text fontSize="13px" fontWeight="100">* 저희 서비스는 오직 네이버 로그인을 통해서만 이용하실 수 있습니다.</Text>
+                        <div onClick={() => window.location.hash="#/main-page"} >Main 화면으로 이동</div>
                     </AuthContainer>
                     :
                     <AuthContainer>
@@ -196,8 +197,9 @@ const UserAuthPage = () => {
                                         <Input placeholder="2~10자 사이, 한글과 영어만 사용가능"></Input>
                                         <Button
                                             marginLeft="8px"
-                                            backgroundColor_hover="#d36e6e"
-                                            backgroundColor_active="#f37777"
+                                            backgroundColor="#d36e6e"
+                                            backgroundColor_hover="#f54343"
+                                            backgroundColor_active="#fd8585"
                                         >
                                             중복확인
                                         </Button>
