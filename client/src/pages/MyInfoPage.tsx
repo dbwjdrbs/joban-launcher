@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { DivProps } from "../interfaces/ElementsInterfaces";
 
 import profile from "../assets/profile1.png"
-
+import { Link } from "react-router-dom";
 
 const Wrap = styled.div`
     height: 100%;
@@ -25,6 +25,7 @@ const Container = styled.div`
 const IndexContainer = styled.div`
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 `;
 
 const Index = styled.div<DivProps>`
@@ -63,8 +64,6 @@ const ProfileWrap = styled.div`
     width: 100%;
     height: 90%;
     padding: 25px;
-    /* border-top-right-radius: 15px; */
-    /* border-bottom-right-radius: 15px; */
 `;
 
 const ProfileContainer = styled.div`
@@ -80,12 +79,12 @@ const Profile = styled.div`
     background-size: cover;
     background-repeat: no-repeat;
     border-radius: 100%;
-    border: 2px solid #ffffff;
+    border: 5px solid #ffffff;
     margin-left: 50px;
     
     @media all and (max-height: 750px), (max-width: 1600px) {
-        width: 300px;
-        height: 300px;
+        width: 230px;
+        height: 230px;
     }
 `;
 
@@ -140,7 +139,7 @@ const ESLContiner = styled.div<DivProps>`
     }
 
     @media all and (max-height: 750px), (max-width: 1600px) {
-        height: 100px;
+        height: 130px;
     }
 `;
 
@@ -161,7 +160,7 @@ const FinalContiner = styled.div<DivProps>`
     }
 
     @media all and (max-height: 750px), (max-width: 1600px) {
-        height: 100px;
+        height: 130px;
     }
 `;
 
@@ -181,6 +180,39 @@ const Info = styled.div`
     }
 `;
 
+const Input = styled.input`
+    width: 180px;
+    height: 40px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border: none;
+    background-color: #222222;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    padding-left: 15px;
+    font-weight: 100;
+
+    &::placeholder {
+        color: #bebebe;
+        font-size: 18px;
+        font-weight: bold;
+    }
+`;
+
+const Button = styled.button`
+    width: 40px;
+    height: 42px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: #222222;
+    border: none;
+
+    &:active {
+        background-color: #1f1e1e;
+    }
+`;
+
 const Column = styled.div`
     display: flex;
     flex-direction: column;
@@ -194,8 +226,8 @@ const Row = styled.div`
 `;
 
 const SVG = styled.svg`
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     fill: none;
   
     @media all and (max-height: 750px), (max-width: 1600px) {
@@ -221,11 +253,24 @@ const MyInfoPage = () => {
             <NavigationBar selectedContent="myinfo"></NavigationBar>
             <Container>
                 <IndexContainer>
-                    <Index onClick={handleSetIndex(0)} borderBottom={isIndex === 0 ? "2px solid white" : null}>개요</Index>
-                    <Index onClick={handleSetIndex(1)} borderBottom={isIndex === 1 ? "2px solid white" : null}>도전과제</Index>
-                    <Index onClick={handleSetIndex(2)} borderBottom={isIndex === 2 ? "2px solid white" : null}>대전기록</Index>
-                    <Index onClick={handleSetIndex(3)} borderBottom={isIndex === 3 ? "2px solid white" : null}>랭킹</Index>
-                    <Index onClick={handleSetIndex(4)} borderBottom={isIndex === 4 ? "2px solid white" : null}>통계</Index>
+                    <Row>
+                        <Index onClick={handleSetIndex(0)} borderBottom={isIndex === 0 ? "2px solid white" : null}>개요</Index>
+                        <Index onClick={handleSetIndex(1)} borderBottom={isIndex === 1 ? "2px solid white" : null}>도전과제</Index>
+                        <Index onClick={handleSetIndex(2)} borderBottom={isIndex === 2 ? "2px solid white" : null}>대전기록</Index>
+                        <Index onClick={handleSetIndex(3)} borderBottom={isIndex === 3 ? "2px solid white" : null}>랭킹</Index>
+                        <Index onClick={handleSetIndex(4)} borderBottom={isIndex === 4 ? "2px solid white" : null}>통계</Index>
+                    </Row>
+                    {
+                        isIndex === 0 ? <Row>
+                            <Input placeholder="유저 검색" maxLength={10} />
+                            <Button>
+                                <svg width="80%" height="80%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M21 21L16.65 16.65M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                                </svg>
+                            </Button>
+                        </Row>
+                            : null
+                    }
                 </IndexContainer>
                 {
                     isIndex === 0 ?
@@ -235,23 +280,25 @@ const MyInfoPage = () => {
                                 <ProfileContainer>
                                     <Row>
                                         <Text
-                                            fontSize="80px"
+                                            fontSize="60px"
                                             MediafontSize="40px"
                                         >
                                             {"일일일일일일일일일일"}&nbsp;
                                         </Text>
-                                        <Column>
-                                            <SVG viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" cursor="pointer" >
-                                                <path d="M18 10L14 6M2.49997 21.5L5.88434 21.124C6.29783 21.078 6.50457 21.055 6.69782 20.9925C6.86926 20.937 7.03242 20.8586 7.18286 20.7594C7.35242 20.6475 7.49951 20.5005 7.7937 20.2063L21 7C22.1046 5.89543 22.1046 4.10457 21 3C19.8954 1.89543 18.1046 1.89543 17 3L3.7937 16.2063C3.49952 16.5005 3.35242 16.6475 3.24061 16.8171C3.1414 16.9676 3.06298 17.1307 3.00748 17.3022C2.94493 17.4954 2.92195 17.7021 2.87601 18.1156L2.49997 21.5Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                            </SVG>
-                                        </Column>
+                                        <Link to="/setting-page">
+                                            <Column>
+                                                <SVG viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" cursor="pointer" >
+                                                    <path d="M18 10L14 6M2.49997 21.5L5.88434 21.124C6.29783 21.078 6.50457 21.055 6.69782 20.9925C6.86926 20.937 7.03242 20.8586 7.18286 20.7594C7.35242 20.6475 7.49951 20.5005 7.7937 20.2063L21 7C22.1046 5.89543 22.1046 4.10457 21 3C19.8954 1.89543 18.1046 1.89543 17 3L3.7937 16.2063C3.49952 16.5005 3.35242 16.6475 3.24061 16.8171C3.1414 16.9676 3.06298 17.1307 3.00748 17.3022C2.94493 17.4954 2.92195 17.7021 2.87601 18.1156L2.49997 21.5Z" stroke="white  " strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                                </SVG>
+                                            </Column>
+                                        </Link>
                                     </Row>
                                     <Text
                                         marginTop="1px"
                                         fontSize="40px"
                                         MediafontSize="20px"
                                     >
-                                        종합 전적 : 12승 12패 (50%)
+                                        종합 전적 : 10승 10패 (50%)
                                     </Text>
                                     <Text
                                         marginTop="1px"
@@ -280,42 +327,42 @@ const MyInfoPage = () => {
                             <RecordContainer>
                                 <ESLContiner>
                                     <Text
-                                        fontSize="100px"
-                                        MediafontSize="25px"
+                                        fontSize="80px"
+                                        MediafontSize="35px"
                                         marginBottom="5px"
                                     >
                                         ESL ver
                                     </Text>
                                     <Text
-                                        fontSize="40px"
-                                        MediafontSize="16px"
+                                        fontSize="30px"
+                                        MediafontSize="20px"
                                     >
-                                        전적 : 10승 2패 (80%)
+                                        전적 : 8승 2패 (80%)
                                     </Text>
                                     <Text
-                                        fontSize="40px"
-                                        MediafontSize="16px"
+                                        fontSize="30px"
+                                        MediafontSize="20px"
                                     >
                                         점수 : 80점
                                     </Text>
                                 </ESLContiner>
                                 <FinalContiner>
                                     <Text
-                                        fontSize="100px"
-                                        MediafontSize="25px"
+                                        fontSize="80px"
+                                        MediafontSize="35px"
                                         marginBottom="5px"
                                     >
                                         FINAL ver
                                     </Text>
                                     <Text
-                                        fontSize="40px"
-                                        MediafontSize="16px"
+                                        fontSize="30px"
+                                        MediafontSize="20px"
                                     >
                                         전적 : 2승 8패 (20%)
                                     </Text>
                                     <Text
-                                        fontSize="40px"
-                                        MediafontSize="16px"
+                                        fontSize="30px"
+                                        MediafontSize="20px"
                                     >
                                         점수 : 20점
                                     </Text>
