@@ -24,6 +24,7 @@ const Container = styled.div`
 
 const IndexContainer = styled.div`
     display: flex;
+    height: 45px;
     flex-direction: row;
     justify-content: space-between;
 `;
@@ -63,7 +64,6 @@ const ProfileWrap = styled.div`
     align-items: center;
     width: 100%;
     height: 90%;
-    padding: 25px;
 `;
 
 const ProfileContainer = styled.div`
@@ -368,6 +368,13 @@ const MyInfoPage = () => {
                                     </Text>
                                 </FinalContiner>
                             </RecordContainer>
+                        </OverViewContainer>
+                        : null
+                }
+                {
+                    isIndex === 1 ?
+                        <OverViewContainer>
+                            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100%', fontSize: '25px' }}>준비중...</div>
                         </OverViewContainer>
                         : null
                 }
