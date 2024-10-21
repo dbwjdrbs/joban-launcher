@@ -5,14 +5,11 @@ import TitleBar from './components/TitleBar';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 
-createRoot(document.getElementById('app')).render(
-    <Provider store={store}>
-        <App />
-    </Provider>
-);
+const root = createRoot(document.getElementById('app')!);
 
-createRoot(document.getElementById('titlebar')!).render(
+root.render(
     <Provider store={store}>
         <TitleBar />
+        <App />
     </Provider>
 );
