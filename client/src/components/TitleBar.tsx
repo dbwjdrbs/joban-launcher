@@ -58,7 +58,7 @@ const TitleText = styled.div`
 `;
 
 const TitleBar: React.FC = () => {
-    const [isMaximized, setIsMaximized] = useState<boolean>(true);
+    const [isMaximized, setIsMaximized] = useState<boolean>(false);
 
     useEffect(() => {
         const handleWindowStateChange = (state: boolean) => {
