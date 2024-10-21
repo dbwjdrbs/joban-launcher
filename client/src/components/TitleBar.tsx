@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useSelector } from 'react-redux'
-import { RootState } from '../redux/store';
+
 import { ButtonProps } from "../interfaces/ElementsInterfaces";
 
 const Wrap = styled.div`
     background-color: #1b1b1b;
     width: 100%;
-    height: 35px;
+    height: 40px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding-bottom: 3px;
+    -webkit-app-region: drag;
 `;
 
 const TitleBarContainer = styled.div`
@@ -19,10 +18,10 @@ const TitleBarContainer = styled.div`
     height: 20px;
     display: flex;
     flex-direction: row;
+    align-items: center;
     justify-content: space-between;
     -webkit-user-select: none;
     user-select: none;
-    -webkit-app-region: drag;
 `;
 
 const ButtonsContainer = styled.div`
@@ -33,7 +32,7 @@ const ButtonsContainer = styled.div`
 `;
 
 const Button = styled.button<ButtonProps>`
-  height: 25px;
+  height: 30px;
   width: 35px;
   margin-right: 5px;
   align-items: center;
@@ -59,12 +58,21 @@ const TitleText = styled.div`
 `;
 
 const TitleBar: React.FC = () => {
-    // const [maximize, setMaximize] = useState<boolean>(true);
-    const isMaximized = useSelector((state: RootState) => state.window.isMaximized);
+    const [isMaximized, setIsMaximized] = useState<boolean>(true);
 
     useEffect(() => {
-        console.log("Maximized State:", isMaximized);
-      }, [isMaximized]);
+        const handleWindowStateChange = (state: boolean) => {
+            setIsMaximized(state);
+        };
+    
+        // IPC 리스너 등록
+        const cleanup = window.electron.onWindowStateChanged(handleWindowStateChange);
+    
+        return () => {
+          // 컴포넌트 언마운트 시 리스너 제거
+          cleanup();
+        };
+      }, []);
 
     const handleMinimizeApp = (): void => {
         window.electron.sendRequest('minimizeApp', null);

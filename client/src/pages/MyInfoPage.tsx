@@ -100,6 +100,9 @@ const Text = styled.div<DivProps>`
     margin-bottom: ${(props) => props.marginBottom};
     -webkit-user-select: none;
     user-select: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
     @media all and (max-height: 700px) {
         font-size: ${(props) => props.MediafontSize};
@@ -118,10 +121,6 @@ const RecordContainer = styled.div`
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
     align-items: end;
-`;
-
-const Record = styled.div`
-    margin-right: 20px;
 `;
 
 const ESLContiner = styled.div<DivProps>`
@@ -166,9 +165,52 @@ const FinalContiner = styled.div<DivProps>`
     }
 `;
 
+const Info = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #505050;
+    height: 1em;
+    font-size: 30px;
+    padding: 5px;
+    border-radius: 5px;
+    margin-left: 8px;
+
+    @media all and (max-height: 750px), (max-width: 1600px) {
+        font-size: 15px;
+    }
+`;
+
+const Column = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+`;
+
+const Row = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+`;
+
+const SVG = styled.svg`
+    width: 50px;
+    height: 50px;
+    fill: none;
+  
+    @media all and (max-height: 750px), (max-width: 1600px) {
+        width: 25px;
+        height: 25px;
+    }
+`;
 
 const MyInfoPage = () => {
     const [isIndex, setIsIndex] = useState<number>(0);
+    const [isHoverInfo, setIsHoverInfo] = useState<boolean>(false);
+
+    const handleHoverInfo = (): void => {
+        setIsHoverInfo(!isHoverInfo);
+    };
 
     const handleSetIndex = (num: number) => (e: React.MouseEvent<HTMLDivElement>): void => {
         setIsIndex(num);
@@ -191,15 +233,19 @@ const MyInfoPage = () => {
                             <ProfileWrap>
                                 <Profile></Profile>
                                 <ProfileContainer>
-                                    <Text
-                                        fontSize="80px"
-                                        MediafontSize="40px"
-                                    >
-                                        {"일일일일일일일일일일"}&nbsp;
-                                        <svg width="25px" height="25px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" cursor="pointer" >
-                                            <path d="M18 10L14 6M2.49997 21.5L5.88434 21.124C6.29783 21.078 6.50457 21.055 6.69782 20.9925C6.86926 20.937 7.03242 20.8586 7.18286 20.7594C7.35242 20.6475 7.49951 20.5005 7.7937 20.2063L21 7C22.1046 5.89543 22.1046 4.10457 21 3C19.8954 1.89543 18.1046 1.89543 17 3L3.7937 16.2063C3.49952 16.5005 3.35242 16.6475 3.24061 16.8171C3.1414 16.9676 3.06298 17.1307 3.00748 17.3022C2.94493 17.4954 2.92195 17.7021 2.87601 18.1156L2.49997 21.5Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                        </svg>
-                                    </Text>
+                                    <Row>
+                                        <Text
+                                            fontSize="80px"
+                                            MediafontSize="40px"
+                                        >
+                                            {"일일일일일일일일일일"}&nbsp;
+                                        </Text>
+                                        <Column>
+                                            <SVG viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" cursor="pointer" >
+                                                <path d="M18 10L14 6M2.49997 21.5L5.88434 21.124C6.29783 21.078 6.50457 21.055 6.69782 20.9925C6.86926 20.937 7.03242 20.8586 7.18286 20.7594C7.35242 20.6475 7.49951 20.5005 7.7937 20.2063L21 7C22.1046 5.89543 22.1046 4.10457 21 3C19.8954 1.89543 18.1046 1.89543 17 3L3.7937 16.2063C3.49952 16.5005 3.35242 16.6475 3.24061 16.8171C3.1414 16.9676 3.06298 17.1307 3.00748 17.3022C2.94493 17.4954 2.92195 17.7021 2.87601 18.1156L2.49997 21.5Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                            </SVG>
+                                        </Column>
+                                    </Row>
                                     <Text
                                         marginTop="1px"
                                         fontSize="40px"
@@ -214,6 +260,21 @@ const MyInfoPage = () => {
                                     >
                                         종합 점수 : 100점
                                     </Text>
+                                    <Row>
+                                        <Text
+                                            marginTop="1px"
+                                            fontSize="40px"
+                                            MediafontSize="20px"
+                                        >
+                                            주 종족 : {"조선"}&nbsp;
+                                        </Text>
+                                        <Column onMouseEnter={handleHoverInfo} onMouseLeave={handleHoverInfo}>
+                                            <SVG viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M12 8V12M12 16H12.01M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                            </SVG>
+                                        </Column>
+                                        {isHoverInfo ? <Info>가장 많이 선택한 종족</Info> : null}
+                                    </Row>
                                 </ProfileContainer>
                             </ProfileWrap>
                             <RecordContainer>
@@ -239,7 +300,7 @@ const MyInfoPage = () => {
                                     </Text>
                                 </ESLContiner>
                                 <FinalContiner>
-                                <Text
+                                    <Text
                                         fontSize="100px"
                                         MediafontSize="25px"
                                         marginBottom="5px"
