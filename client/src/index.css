@@ -7,3 +7,10 @@ body {
   overflow: hidden;
   background-color: #2e2e2e;
 }
+
+*:focus {
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  scale: 1;
+}

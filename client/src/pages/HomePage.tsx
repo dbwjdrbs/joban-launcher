@@ -62,7 +62,7 @@ const Content = styled.div<DivProps>`
     user-select: none;
 
     &:hover {
-        scale: 1.1;
+        scale: 1.05;
     }
 `;
 

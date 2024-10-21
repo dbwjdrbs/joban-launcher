@@ -69,7 +69,7 @@ const Input = styled.input`
     height: 37px;
     border-radius: 5px;
     border: none;
-    background-color: #616161;
+    background-color: #222222;
     color: white;
     font-size: 18px;
     font-weight: bold;
@@ -105,10 +105,10 @@ const FolderIcon = styled.button`
 
 const GamesSelect = styled.select`
     width: 86.5%;
-    background-color: #616161;
+    background-color: #222222;
     overflow-x: hidden;
     border-radius: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 25px;
 `;
 
 const GamesOption = styled.option`
@@ -184,6 +184,7 @@ const SettingPage = () => {
                             <GamesOption value="bmw">BMW</GamesOption>
                             <GamesOption value="ford" selected>르노삼성</GamesOption>
                         </GamesSelect>
+                        <TitleText>최신버전 확인</TitleText>
                     </>
                     : null}
             </ContentContainer>
