@@ -125,7 +125,7 @@ const RecordContainer = styled.div`
 const ESLContiner = styled.div<DivProps>`
     display: flex;
     flex-direction: column;
-    background-color: #0f61ad;
+    background-color: #194e80;
     width: 100%;
     height: 300px;
     padding-left: 20px;
@@ -374,7 +374,7 @@ const MyInfoPage = () => {
                 {
                     isIndex === 1 ?
                         <OverViewContainer>
-                            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100%', fontSize: '25px' }}>준비중...</div>
+                            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', height: '100%', fontSize: '25px' }}>준비중....</div>
                         </OverViewContainer>
                         : null
                 }
