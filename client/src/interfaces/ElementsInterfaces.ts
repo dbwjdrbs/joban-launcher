@@ -12,6 +12,9 @@ export interface DivProps extends React.HTMLAttributes<HTMLDivElement> {
     marginBottom?: string;
     marginRight?: string
     marginLeft?: string;
+    paddingLeft?: string;
+    flexDirection?: string;
+    alignItems?: string;
     height?: string;
     width?: string;
 };
@@ -27,4 +30,5 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
     backgroundColor_active?: string;
     width?: string;
     height?: string;
+    fontSize?: string;
 };
