@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import NavigationBar from "../components/NavigationBar";
 import styled from "styled-components";
-import { DivProps, ButtonProps } from "../interfaces/ElementsInterfaces";
+import { DivProps, ButtonProps, InputProps } from "../interfaces/ElementsInterfaces";
 import openedFolder from "../assets/opened-folder.png";
 import closedFolder from "../assets/closed-folder.png";
 import { useLocation } from "react-router-dom";
+import profile from "../assets/profile1.png"
 
 const Wrap = styled.div`
     height: 100%;
@@ -42,7 +43,7 @@ const Content = styled.div<DivProps>`
     justify-content: center;
     font-size: 18px;
     height: 45px;
-    width: 100%;
+    width: calc(100% - 9px);
     background-color: ${(props) => props.backgroundColor};
     border-right: ${(props) => props.borderRight};
     color: white;
@@ -63,19 +64,22 @@ const TitleText = styled.div<DivProps>`
     font-weight: ${(props) => props.fontWeight || "bold"};
     color: white;
     margin-bottom: ${(props) => props.marginBottom};
+    margin-top: ${(props) => props.marginTop};
 `;
 
-const Input = styled.input`
-    width: 85%;
-    height: 37px;
+const Input = styled.input<InputProps>`
+    width: ${(props) => props.width};
+    height: ${(props) => props.height};
     border-radius: 5px;
-    border: none;
-    background-color: #222222;
+    border: ${(props) => props.border || "none"};
+    background-color: ${(props) => props.backgroundColor || "#222222"};
+    text-align: ${(props) => props.textAlign};;
     color: white;
     font-size: 18px;
     font-weight: bold;
-    padding-left: 10px;
-    margin-right: 15px;
+    padding-left: ${(props) => props.paddingLeft};
+    margin-right: ${(props) => props.marginRight};
+    margin-top: ${(props) => props.marginTop};
 
     &::placeholder {
         color: #bebebe;
@@ -90,6 +94,19 @@ const ContentContainer = styled.div<DivProps>`
     padding-left: ${(props) => props.paddingLeft};
     margin-bottom: ${(props) => props.marginBottom || "25px"};
 `;
+
+const Container = styled.div<DivProps>`
+    display: flex;
+    flex-direction: ${(props) => props.flexDirection};
+    justify-content: ${(props) => props.justifyContent};
+    align-items: ${(props) => props.alignItems};
+    padding-left: ${(props) => props.paddingLeft};
+    margin-bottom: ${(props) => props.marginBottom};
+    background-color: ${(props) => props.backgroundColor};
+    width: ${(props) => props.width};
+    height: ${(props) => props.height};
+`;
+
 
 const FolderIcon = styled.button`
     background-image: url(${closedFolder});
@@ -143,13 +160,25 @@ const Button = styled.button<ButtonProps>`
     }
 `;
 
+const Profile = styled.div`
+    width: 250px;
+    height: 250px;
+    background-image: url(${profile});
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 100%;
+    border: 5px solid #ffffff;
+    margin-top: 20px;
+`;
+
 const SettingPage = () => {
     const [isContent, setIsContent] = useState<number>(0);
     const [isLauncherVersion, setIsLauncherVersion] = useState<boolean>(true);
+    const [isNicknameEdit, setIsNicknameEdit] = useState<boolean>(false);
     const location = useLocation();
 
     useEffect(() => {
-        setIsContent(location.state?.content || 1);
+        setIsContent(location.state?.content || 0);
     }, [location?.state]);
 
     const handleSetContent = (num: number) => (e: React.MouseEvent<HTMLDivElement>): void => {
@@ -166,15 +195,15 @@ const SettingPage = () => {
             <MenuContainer>
                 <Content
                     onClick={handleSetContent(0)}
-                    borderRight={isContent === 0 ? "2px solid white" : null}
+                    borderRight={isContent === 0 ? "10px solid white" : null}
                     backgroundColor={isContent === 0 ? "#4d504f" : null}
                     marginTop="5px"
                 >
-                    <ScaleHover>내 계정</ScaleHover>
+                    <ScaleHover>계정</ScaleHover>
                 </Content>
                 <Content
                     onClick={handleSetContent(1)}
-                    borderRight={isContent === 1 ? "2px solid white" : null}
+                    borderRight={isContent === 1 ? "10px solid white" : null}
                     backgroundColor={isContent === 1 ? "#4d504f" : null}
                     marginTop="10px"
                 >
@@ -182,12 +211,26 @@ const SettingPage = () => {
                 </Content>
             </MenuContainer>
             <ContentWrap>
-                {isContent === 0 ? <div>내정보수정 세팅</div> : null}
+                {/* 내 계정 */}
+                {isContent === 0 ?
+                    <Container flexDirection="column" width="100%" height="100%" alignItems="center">
+                        <Container flexDirection="column" width="90%" height="100%" alignItems="center" backgroundColor="#222222">
+                            <Profile></Profile>
+                            {
+                                isNicknameEdit ?
+                                    <Input defaultValue={"닉네임"} marginTop="20px" textAlign="center" backgroundColor="#4d504f" width="300px" height="37px"></Input>
+                                    :
+                                    <TitleText marginTop="20px">닉네임</TitleText>
+                            }
+                        </Container>
+                    </Container>
+                    : null}
+                {/* 런처 */}
                 {isContent === 1 ?
                     <>
                         <TitleText marginBottom="10px">게임 폴더 경로 지정</TitleText>
                         <ContentContainer>
-                            <Input></Input>
+                            <Input placeholder="오른쪽 폴더 모양을 클릭하여 경로 지정" paddingLeft="10px" marginRight="15px" width="85%" height="37px" />
                             <FolderIcon></FolderIcon>
                         </ContentContainer>
                         <ContentContainer marginBottom="10px">
