@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavigationBar from "../components/NavigationBar";
 import styled from "styled-components";
 import { DivProps, ButtonProps } from "../interfaces/ElementsInterfaces";
 import openedFolder from "../assets/opened-folder.png";
 import closedFolder from "../assets/closed-folder.png";
+import { useLocation } from "react-router-dom";
 
 const Wrap = styled.div`
     height: 100%;
@@ -138,7 +139,12 @@ const Button = styled.button<ButtonProps>`
 `;
 
 const SettingPage = () => {
-    const [isContent, setIsContent] = useState<number>(1);
+    const [isContent, setIsContent] = useState<number>(0);
+    const location = useLocation();
+
+    useEffect(() => {
+        setIsContent(location.state?.content || 0);
+    }, [location?.state]);
 
     const handleSetContent = (num: number) => (e: React.MouseEvent<HTMLDivElement>): void => {
         setIsContent(num);
@@ -177,7 +183,7 @@ const SettingPage = () => {
                         <RowContainer marginBottom="10px">
                             <TitleText>게임 파일 등록</TitleText>
                             <Button width="25px" height="25px" marginLeft="5px">+</Button>
-                            <Button width="25px" height="25px"marginLeft="3.5px">-</Button>
+                            <Button width="25px" height="25px" marginLeft="3.5px">-</Button>
                         </RowContainer>
                         <GamesSelect name="games" size={5}>
                             <GamesOption value="benz">벤츠</GamesOption>
