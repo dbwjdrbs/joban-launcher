@@ -24,7 +24,7 @@ const MenuContainer = styled.div`
     margin-left: 2px;
 `;
 
-const ContentContainer = styled.div`
+const ContentWrap = styled.div`
     display: flex;
     flex-direction: column;
     height: calc(100vh - 60px);
@@ -59,8 +59,8 @@ const ScaleHover = styled.div`
     }
 `
 const TitleText = styled.div<DivProps>`
-    font-size: 20px;
-    font-weight: bold;
+    font-size: ${(props) => props.fontSize || "20px"};
+    font-weight: ${(props) => props.fontWeight || "bold"};
     color: white;
     margin-bottom: ${(props) => props.marginBottom};
 `;
@@ -83,10 +83,11 @@ const Input = styled.input`
     }
 `;
 
-const RowContainer = styled.div<DivProps>`
+const ContentContainer = styled.div<DivProps>`
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: ${(props) => props.flexDirection || "row"};
+    align-items: ${(props) => props.alignItems || "center"};
+    padding-left: ${(props) => props.paddingLeft};
     margin-bottom: ${(props) => props.marginBottom || "25px"};
 `;
 
@@ -119,6 +120,10 @@ const GamesOption = styled.option`
 `;
 
 const Button = styled.button<ButtonProps>`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: ${(props) => props.width};
     height: ${(props) => props.height};
     color: white;
@@ -128,7 +133,7 @@ const Button = styled.button<ButtonProps>`
     margin-right: ${(props) => props.marginRight};
     margin-left: ${(props) => props.marginLeft};
     margin-top: ${(props) => props.marginTop};
-    font-size: 20px;
+    font-size: ${(props) => props.fontSize || "`20px"};
     &:hover {
         background-color: ${(props) => props.backgroundColor_hover || "#707070"};
     }
@@ -140,14 +145,19 @@ const Button = styled.button<ButtonProps>`
 
 const SettingPage = () => {
     const [isContent, setIsContent] = useState<number>(0);
+    const [isLauncherVersion, setIsLauncherVersion] = useState<boolean>(true);
     const location = useLocation();
 
     useEffect(() => {
-        setIsContent(location.state?.content || 0);
+        setIsContent(location.state?.content || 1);
     }, [location?.state]);
 
     const handleSetContent = (num: number) => (e: React.MouseEvent<HTMLDivElement>): void => {
         setIsContent(num);
+    };
+
+    const handleCheckLauncherVersion = (): void => {
+        // TODO : 비즈니스 로직 추가
     };
 
     return (
@@ -171,29 +181,53 @@ const SettingPage = () => {
                     <ScaleHover>런처</ScaleHover>
                 </Content>
             </MenuContainer>
-            <ContentContainer>
+            <ContentWrap>
                 {isContent === 0 ? <div>내정보수정 세팅</div> : null}
                 {isContent === 1 ?
                     <>
                         <TitleText marginBottom="10px">게임 폴더 경로 지정</TitleText>
-                        <RowContainer>
+                        <ContentContainer>
                             <Input></Input>
                             <FolderIcon></FolderIcon>
-                        </RowContainer>
-                        <RowContainer marginBottom="10px">
+                        </ContentContainer>
+                        <ContentContainer marginBottom="10px">
                             <TitleText>게임 파일 등록</TitleText>
                             <Button width="25px" height="25px" marginLeft="5px">+</Button>
                             <Button width="25px" height="25px" marginLeft="3.5px">-</Button>
-                        </RowContainer>
+                        </ContentContainer>
                         <GamesSelect name="games" size={5}>
                             <GamesOption value="benz">벤츠</GamesOption>
                             <GamesOption value="bmw">BMW</GamesOption>
                             <GamesOption value="ford" selected>르노삼성</GamesOption>
                         </GamesSelect>
-                        <TitleText>최신버전 확인</TitleText>
+                        <TitleText marginBottom="5px">버전 확인</TitleText>
+                        <ContentContainer flexDirection="column" paddingLeft="10px" alignItems="none">
+                            <TitleText fontSize="18px" fontWeight="500">현재 버전 : 0.1 beta</TitleText>
+                            <ContentContainer marginBottom="0">
+                                <TitleText fontSize="18px" fontWeight="500">최신 버전 :&nbsp;</TitleText>
+                                {
+                                    isLauncherVersion ?
+                                        <TitleText fontSize="18px" fontWeight="500">0.1 beta</TitleText>
+                                        :
+                                        <Button
+                                            width="50px"
+                                            height="20px"
+                                            fontSize="15px"
+                                            onClick={handleCheckLauncherVersion}
+                                        >
+                                            확인
+                                        </Button>
+                                }
+                            </ContentContainer>
+                        </ContentContainer>
+                        <TitleText marginBottom="10px">폴더 바로가기</TitleText>
+                        <ContentContainer flexDirection="row" alignItems="none" paddingLeft="10px">
+                            <Button width="120px" height="30px" fontSize="15px" marginRight="10px">게임 폴더</Button>
+                            <Button width="120px" height="30px" fontSize="15px">런처 폴더</Button>
+                        </ContentContainer>
                     </>
                     : null}
-            </ContentContainer>
+            </ContentWrap>
         </Wrap>
     );
 };
