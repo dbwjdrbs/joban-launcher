@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { SelectHTMLAttributes, useState } from "react";
 import NavigationBar from "../components/NavigationBar";
 import styled from "styled-components";
 import { DivProps } from "../interfaces/ElementsInterfaces";
+import { useNavigate } from "react-router-dom";
 
 const Wrap = styled.div`
     height: 100%;
@@ -114,6 +115,9 @@ const GameStarterContainer = styled.div`
 
 const HomePage = () => {
     const [isPatchNote, setIsPatchNote] = useState<boolean>(false);
+    const [gameVersion, setGameVersion] = useState<number>(0);
+
+    const navigate = useNavigate();
 
     const handleIsNotice = (): void => {
         setIsPatchNote(false);
@@ -121,6 +125,10 @@ const HomePage = () => {
 
     const handleIsPatchNote = (): void => {
         setIsPatchNote(true);
+    };
+
+    const handleVersionLoad = (e: React.ChangeEvent<HTMLSelectElement>): void => {
+        e.target.value === "1" ? navigate('/setting-page', { state: { content: 1 } }) : null;
     };
 
     return (
@@ -145,11 +153,11 @@ const HomePage = () => {
                         </RowContainer>
                     </TitleContainer>
                     <GameStarterContainer>
-                        <GameSelector name="games">
-                            <GameSelectorOption disabled hidden selected>
+                        <GameSelector name="games" value={gameVersion} onChange={handleVersionLoad}>
+                            <GameSelectorOption disabled hidden value={0}>
                                 게임 버전을 선택해주세요.
                             </GameSelectorOption>
-                            <GameSelectorOption>불러오기</GameSelectorOption>
+                            <GameSelectorOption value={1}>불러오기</GameSelectorOption>
                         </GameSelector>
                         <GamestartButton>GAME START</GamestartButton>
                     </GameStarterContainer>

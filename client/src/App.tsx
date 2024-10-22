@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import '../src/index.css';
-import { HashRouter, Switch, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 
 import UserAuthPage from './pages/UserAuthPage';
 import HomePage from './pages/HomePage';
@@ -19,12 +19,12 @@ const App: React.FC = () => {
         <>
             <HashRouter>
                 <Wrap>
-                    <Switch>
-                        <Route exact path="/" component={UserAuthPage} />
-                        <Route path="/main-page" component={HomePage} />
-                        <Route path="/myinfo-page" component={MyInfoPage} />
-                        <Route path="/setting-page" component={SettingPage} />
-                    </Switch>
+                    <Routes>
+                        <Route path="/" element={<UserAuthPage />} />
+                        <Route path="/main-page" element={<HomePage />} />
+                        <Route path="/myinfo-page" element={<MyInfoPage />} />
+                        <Route path="/setting-page" element={<SettingPage />} />
+                    </Routes>
                 </Wrap>
             </HashRouter>
         </>
