@@ -3,6 +3,7 @@ import NavigationBar from "../components/NavigationBar";
 import styled from "styled-components";
 import { DivProps } from "../interfaces/ElementsInterfaces";
 import { useNavigate } from "react-router-dom";
+import { NoticeForm } from "../components/NoticeForm";
 
 const Wrap = styled.div`
     height: 100%;
@@ -36,17 +37,17 @@ const TitleContainer = styled.div`
 `;
 
 const MainContentContainer = styled.div`
-    height: 90%;
-    width: 95%;
+    height: 100%;
+    width: calc(100% - 60px);
     display: flex;
-    border: 1px solid red;
-    margin-left: 20px;
+    margin-left: 30px;
+    background-color: #222222;
 `;
 
 const RowContainer = styled.div`
     display: flex;
     flex-direction: row;
-    padding-inline-start: 25px;
+    padding-inline-start: 32px;
     padding-block-start: 20px;
 `;
 
@@ -85,11 +86,11 @@ const GamestartButton = styled.button`
     user-select: none;
 
     &:hover {
-        scale: 1.05;
+        scale: 1.01;
     }
 
     &:active {
-        scale: 0.95;
+        scale: 0.99;
     }
 `;
 
@@ -115,6 +116,7 @@ const GameStarterContainer = styled.div`
 
 const HomePage = () => {
     const [isPatchNote, setIsPatchNote] = useState<boolean>(false);
+    const [isNoticeForm, setIsNoticeForm] = useState<number>(0);
     const [gameVersion, setGameVersion] = useState<number>(0);
 
     const navigate = useNavigate();
@@ -168,7 +170,11 @@ const HomePage = () => {
                             ?
                             null
                             :
-                            null
+                            isNoticeForm === 0 ?
+                                <>
+                                    <NoticeForm></NoticeForm>
+                                </>
+                                : null
                     }
                 </MainContentContainer>
             </ContentContainer>

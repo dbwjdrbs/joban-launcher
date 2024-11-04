@@ -5,6 +5,7 @@ import { DivProps } from "../interfaces/ElementsInterfaces";
 
 import profile from "../assets/profile1.png"
 import { Link } from "react-router-dom";
+import RecordBar from "../components/RecordBar";
 
 const Wrap = styled.div`
     height: 100%;
@@ -46,16 +47,18 @@ const Index = styled.div<DivProps>`
     }
 `;
 
-const OverViewContainer = styled.div`
+const OverViewContainer = styled.div<DivProps>`
     width: calc(100vw - 160px);
     height: calc(100vh - 100px);
     display: flex;
     flex-direction: column;
+    overflow-y: ${(props) => props.overflowY};
     margin-top: 20px;
     background-color: #222222;
     color: white;
-    align-items: center;
-    justify-content: space-between;
+    margin-left: ${(props) => props.marginLeft};
+    align-items: ${(props) => props.alignItems};
+    justify-content: ${(props) => props.justifyContent};
 `;
 
 const ProfileWrap = styled.div`
@@ -378,6 +381,13 @@ const MyInfoPage = () => {
                         </OverViewContainer>
                         : null
                 }
+                {isIndex === 2 ?
+                    <OverViewContainer overflowY="auto">
+                        <RecordBar></RecordBar>
+                        <RecordBar></RecordBar>
+                        <RecordBar></RecordBar>
+                    </OverViewContainer>
+                    : null}
             </Container>
         </Wrap>
     );
