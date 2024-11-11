@@ -91,7 +91,7 @@ const Button = styled.button<ButtonProps>`
 
 const Input = styled.input`
     width: 300px;
-    height: 37px;
+    height: 40px;
     border-radius: 5px;
     border: none;
     background-color: #222222;
@@ -196,7 +196,7 @@ const UserAuthPage = () => {
                                         fontSize="30px"
                                         marginBottom="20px"
                                     >
-                                        닉네임을 입력해주세요.
+                                        닉네임을 입력해주세요
                                     </Text>
                                     <RowContainer marginBottom="12px">
                                         <Input placeholder="2~10자 사이, 한글과 영어만 사용가능"></Input>
