@@ -24,17 +24,22 @@ const AuthContainer = styled.div<DivProps>`
     justify-content: center;
     align-items: center;
     width: 850px;
-    height: ${(props) => props.height || "400px"};
-    border: 1px solid #FFFFFF;
+    height: 420px;
+    border: 1px solid #4d4d4d;
     background-color: #2e2e2e;
-    margin-bottom: 35px;
 `;
 
-const MemberSettingContainer = styled.div`
+const TermsContainer = styled.div`
+    font-size: 16px;
     background-color: white;
     margin-inline: 50px;
     margin-block: 30px;
-    padding: 20px;
+    height: 210px;
+    display: flex;
+    width: 720px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 `;
 
 const RowContainer = styled.div<DivProps>`
@@ -45,7 +50,7 @@ const RowContainer = styled.div<DivProps>`
 `;
 
 const AuthButton = styled.button`
-    width: 340px;
+    width: 337.5px;
     height: 90px;
     margin-bottom: 10px;
     background-image: url(${naver_oauth_login});
@@ -148,10 +153,10 @@ const UserAuthPage = () => {
         <Wrap>
             {
                 isAuthDisplay ?
-                    <AuthContainer height="450px">
+                    <AuthContainer>
                         <Text fontSize="30px"><Span>JOBAN LAUNCHER</Span> 와 함께<br />전장을 누빌 준비가 되셨나요?</Text>
                         <AuthButton onClick={handleAuth} />
-                        <Text fontSize="13px" fontWeight="100">* 저희 서비스는 오직 네이버 로그인을 통해서만 이용하실 수 있습니다.</Text>
+                        <Text fontSize="13px" fontWeight="100" marginBottom="0px">* 저희 서비스는 오직 네이버 로그인을 통해서만 이용하실 수 있습니다.</Text>
                         <div onClick={() => window.location.hash="#/main-page"} >Main 화면으로 이동</div>
                     </AuthContainer>
                     :
@@ -159,7 +164,7 @@ const UserAuthPage = () => {
                         {
                             !isMemberSetting ?
                                 <>
-                                    <MemberSettingContainer>
+                                    <TermsContainer>
                                         1. 본 서비스(이하, JOBAN LAUNCHER)는 유저의 게임 데이터를 기록하는 것을
                                         목적으로 개발되었으며,<br /> ESL 버전 및 Final 버전을 지원합니다. <br />
                                         2. 본 서비스는 현재 시험 운영 중입니다. <br />
@@ -167,7 +172,7 @@ const UserAuthPage = () => {
                                         3. 본 서비스는 조선의 반격 프로세스의 메모리만을 조회합니다. <br />
                                         4. 본 서비스는 조선의 반격 저작권자에 의해 삭제되거나 비공개 처리될 수 있습니다. <br />
                                         5. 본 서비스는 유저의 닉네임, 전적 데이터만을 수집하고 관리합니다.
-                                    </MemberSettingContainer>
+                                    </TermsContainer>
                                     <RowContainer>
                                         <Button
                                             onClick={handleAuthDisplay}
