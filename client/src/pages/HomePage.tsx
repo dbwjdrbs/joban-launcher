@@ -4,14 +4,16 @@ import styled from "styled-components";
 import { DivProps } from "../interfaces/ElementsInterfaces";
 import { useNavigate } from "react-router-dom";
 import { NoticeForm } from "../components/NoticeForm";
+import home_background from "../assets/home_background.png";
 
 const Wrap = styled.div`
     height: 100%;
     width: 100%;
-    background-color: #ffffff;
     display: flex;
-    flex-direction: row;
-    background-color: #2e2e2e;
+    flex-direction: column;
+    background-image: url(${home_background});
+    background-repeat: no-repeat;
+    background-size: contain;
 `;
 
 const ContentContainer = styled.div`

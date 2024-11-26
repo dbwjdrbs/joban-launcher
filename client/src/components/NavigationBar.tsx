@@ -1,96 +1,113 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-import home from "../assets/icons/120x120.png"
-import myInfo from "../assets/swords2.png";
-import setting from "../assets/gear.png";
-import gamestart from "../assets/play-button.png";
-
-import { Link } from "react-router-dom";
-import { DivProps } from "../interfaces/ElementsInterfaces";
+import { useNavigate } from "react-router-dom";
+import { DivProps, ButtonProps } from "../interfaces/ElementsInterfaces";
 
 interface NavigationBarProps {
     selectedContent: string;
 };
 
 const Wrap = styled.div`
-    background-color: #1b1b1b;
-    width: 100px;
-    height: 100%;
+    background-color : rgba(0,0,0,0.85);
+    width: 100%;
+    height: 150px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+`;
+
+const Content = styled.h1<{ isSelected: boolean }>`
+    color: ${(props) => (props.isSelected ? "white" : "#D0A657")};
+    margin: 0;
+    margin-left: 45px;
+    cursor: pointer;
 `;
 
 const Container = styled.div`
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    height: 98%;
+    flex-direction: row;
 `;
 
-const Components = styled.div<DivProps>`
-    width: 65px;
-    height: 65px;
-    background-color: ${(props) => props.backgroundColor};
-    border-radius: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 15px;
-    cursor: pointer;
+const Button = styled.button`
+    width: 280px;
+    height: 70px;
+    color: white;
+    background-color: #222222;
+    border: 1px solid #FACE54;
+    border-radius: 4px;
+    font-size: 30px;
 
     &:hover {
-        background-color: ${(props) => props.backgroundColor_hover};
+        background-color: #707070;
+    }
+
+    &:active {
+        background-color: #979696;
     }
 `;
 
-const Icon = styled.div<DivProps>`
-    background-image: url(${(props) => props.backgroundImage});
-    background-size: cover;
-    background-repeat: no-repeat;
-    width: 40px;
-    height: 40px;
+const Select = styled.select`
+    width: 300px;
+    height: 35px;
+    border: 1px solid #FACE54;
+    background-color: #222222;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    padding-left: 10px;
+    text-align: center;
+    outline: none;
+    margin-right: 45px;
 
-    &:hover {
-        scale: 1.2;
+    &:focus {
+        border: 1px solid #FACE54;
+    }   
+
+    &::placeholder {
+        color: #bebebe;
+        font-size: 15px;
     }
+`;
+
+const Option = styled.option`
 `;
 
 const NavigationBar = ({ selectedContent }: NavigationBarProps) => {
-    const [isHome, setIsHome] = useState<boolean>(false);
-    const [isMyInfo, setIsMyInfo] = useState<boolean>(false);
-    const [isSetting, setIsSetting] = useState<boolean>(false);
+    const [selectedIndex, setSelectedIndex] = useState<number>(1);
+    const navigate = useNavigate();
 
     useEffect(() => {
-        setIsHome(selectedContent === "home");
-        setIsMyInfo(selectedContent === "myinfo");
-        setIsSetting(selectedContent === "setting");
-    }, []);
+        if (selectedContent === "main") setSelectedIndex(1);
+        else if (selectedContent === "myinfo") setSelectedIndex(2);
+        else if (selectedContent === "setting") setSelectedIndex(3);
+    }, [selectedContent]);
+
+    const handleClick = (index: number) => {
+        setSelectedIndex(index);
+
+        if (index === 1)
+            navigate('/main-page');
+        else if (index === 2)
+            navigate('/myinfo-page');
+        else if (index === 3)
+            navigate('/setting-page');
+    };
 
     return (
         <Wrap>
             <Container>
-                <div>
-                    <Link to='/main-page'>
-                        <Components backgroundColor={isHome ? "#4d504f" : "#303030"}>
-                            <Icon backgroundImage={home} />
-                        </Components>
-                    </Link>
-                    <Link to="/myinfo-page">
-                        <Components backgroundColor={isMyInfo ? "#4d504f" : "#303030"}>
-                            <Icon backgroundImage={myInfo} />
-                        </Components>
-                    </Link>
-                </div>
-                <div>
-                    <div onClick={() => window.location.hash = "#/"}>뒤로 가기</div>
-                    <Link to="/setting-page">
-                        <Components backgroundColor={isSetting ? "#4d504f" : "#303030"}>
-                            <Icon backgroundImage={setting} />
-                        </Components>
-                    </Link>
-                </div>
+                <Content isSelected={selectedIndex === 1} onClick={() => handleClick(1)}>홈</Content>
+                <Content isSelected={selectedIndex === 2} onClick={() => handleClick(2)}>내정보</Content>
+                <Content isSelected={selectedIndex === 3} onClick={() => handleClick(3)}>설정</Content>
+                {/* <div onClick={() => navigate('/')}>뒤로 가기</div> */}
             </Container>
+            <Button>게임 시작</Button>
+            <Select>
+                <Option value="Test1Test1">Test1Test1</Option>
+                <Option value="Test2Test2">Test2Test2</Option>
+            </Select>
         </Wrap>
     );
 };
