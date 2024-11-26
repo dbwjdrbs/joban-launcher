@@ -25,19 +25,21 @@ const AuthContainer = styled.div<DivProps>`
     align-items: center;
     width: 850px;
     height: 420px;
-    border: 1px solid #4d4d4d;
+    border: 1px solid #FACE54;
     background-color: #2e2e2e;
 `;
 
 const TermsContainer = styled.div`
     font-size: 16px;
-    background-color: white;
+    background-color: #222222;
+    color: white;
     margin-inline: 50px;
     margin-block: 30px;
     height: 210px;
     display: flex;
     width: 720px;
     flex-direction: column;
+    border: 1px solid #FACE54;
     justify-content: center;
     align-items: center;
 `;
@@ -74,12 +76,14 @@ const Button = styled.button<ButtonProps>`
     width: ${(props) => props.width || "100px"};
     height: 40px;
     color: white;
-    background-color: ${(props) => props.backgroundColor || "#505050"};
-    border: none;
+    background-color: ${(props) => props.backgroundColor || "#484848"};
+    border: 1px solid #FACE54;
     border-radius: 5px;
     margin-right: ${(props) => props.marginRight};
     margin-left: ${(props) => props.marginLeft};
     margin-top: ${(props) => props.marginTop};
+    font-size: 15px;
+
     &:hover {
         background-color: ${(props) => props.backgroundColor_hover || "#707070"};
     }
@@ -91,15 +95,20 @@ const Button = styled.button<ButtonProps>`
 
 const Input = styled.input`
     width: 300px;
-    height: 37px;
+    height: 40px;
     border-radius: 5px;
-    border: none;
+    border: 1px solid #FACE54;
     background-color: #222222;
     color: white;
     font-size: 18px;
     font-weight: bold;
     padding-left: 10px;
     text-align: center;
+    outline: none;
+
+    &:focus {
+        border: 1px solid #FACE54;
+    }   
 
     &::placeholder {
         color: #bebebe;
@@ -182,9 +191,9 @@ const UserAuthPage = () => {
                                         </Button>
                                         <Button
                                             onClick={handleTermsAgree}
-                                            backgroundColor="#6157eb"
-                                            backgroundColor_hover="#756ed3"
-                                            backgroundColor_active="#8077f3"
+                                            backgroundColor="#222222"
+                                            backgroundColor_hover="#111111"
+                                            backgroundColor_active="#111111"
                                         >
                                             확인
                                         </Button>
@@ -196,13 +205,13 @@ const UserAuthPage = () => {
                                         fontSize="30px"
                                         marginBottom="20px"
                                     >
-                                        닉네임을 입력해주세요.
+                                        닉네임을 입력해주세요
                                     </Text>
                                     <RowContainer marginBottom="12px">
                                         <Input placeholder="2~10자 사이, 한글과 영어만 사용가능"></Input>
                                         <Button
                                             marginLeft="8px"
-                                            backgroundColor="#d36e6e"
+                                            backgroundColor="#8B2020"
                                             backgroundColor_hover="#f54343"
                                             backgroundColor_active="#fd8585"
                                         >
@@ -211,9 +220,9 @@ const UserAuthPage = () => {
                                     </RowContainer>
                                     <Button
                                         width="420px"
-                                        backgroundColor="#6157eb"
-                                        backgroundColor_hover="#756ed3"
-                                        backgroundColor_active="#8077f3"
+                                        backgroundColor="#222222"
+                                        backgroundColor_hover="#111111"
+                                        backgroundColor_active="#111111"
                                         onClick={handleNextPage} // 나중에 등록 로직에 추가.
                                     >
                                         등록하기
