@@ -11,7 +11,7 @@ const Wrap = styled.div`
     height: 100%;
     width: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     background-color: #2e2e2e;
 `;
 
